@@ -53,6 +53,13 @@ functions:
           path: todos/{id}
           method: delete
           cors: true
+  filter:
+      handler: handler.filter
+      events:
+        - http:
+            path: todos/filter/
+            method: get
+            cors: true
 
 resources:
   Resources:

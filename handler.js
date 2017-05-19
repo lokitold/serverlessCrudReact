@@ -5,6 +5,7 @@ const todosReadAll = require('./todos-read-all.js');
 const todosReadOne = require('./todos-read-one.js');
 const todosUpdate = require('./todos-update.js');
 const todosDelete = require('./todos-delete.js');
+const todosFilter = require('./todos-filter.js');
 
 module.exports.create = (event, context, callback) => {
   todosCreate(event, (error, result) => {
@@ -64,6 +65,20 @@ module.exports.update = (event, context, callback) => {
 
 module.exports.delete = (event, context, callback) => {
   todosDelete(event, (error, result) => {
+    const response = {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin" : "*"
+      },
+      body: JSON.stringify(result),
+    };
+
+    context.succeed(response);
+  });
+};
+
+module.exports.filter = (event, context, callback) => {
+  todosFilter(event, (error, result) => {
     const response = {
       statusCode: 200,
       headers: {
